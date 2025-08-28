@@ -11,6 +11,9 @@ RUN apt-get update && \
 RUN mkdir -p /tmp/nginx/logs /tmp/nginx/client-body /tmp/nginx/proxy \
     /tmp/nginx/run /tmp/nginx/fastcgi /tmp/nginx/uwsgi /tmp/nginx/scgi
 
+# Berikan kepemilikan direktori kepada user 1000
+RUN chown -R 1000:1000 /tmp/nginx/
+
 # Copy website
 COPY app /app
 
@@ -56,4 +59,3 @@ EXPOSE 7860
 USER 1000
 
 CMD ["nginx", "-g", "daemon off;"]
-
